@@ -24,3 +24,80 @@
             </div>
         </div>
     </header>
+    
+    <main class="container page-spacing">
+        <section class="catalog-section">
+            <h1 class="page-title">Наши услуги</h1>
+            
+            <div class="categories" id="category-filters">
+                <button class="category-btn active" data-category="all">Все услуги</button>
+                <button class="category-btn" data-category="body">Уход за кузовом</button>
+                <button class="category-btn" data-category="interior">Детейлинг салона</button>
+            </div>
+
+            <div class="services-grid" id="services-container">
+            
+                <article class="service-card" data-id="ceramic" data-category="body">
+                    <div class="service-card__badge">Популярно</div>
+                    <div class="service-card__content">
+                        <h2>Нанесение керамики 9H</h2>
+                        <p>Глубокий блеск, мощный гидрофобный эффект и защита ЛКП от выгорания.</p>
+                        <div class="service-card__footer">
+                            <span class="price-from">от 850 BYN</span>
+                            <button class="btn btn--sm open-modal-btn">Подробнее</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="service-card" data-id="chem" data-category="interior">
+                    <div class="service-card__content">
+                        <h2>Детейлинг-химчистка</h2>
+                        <p>Полный разбор салона, удаление сложнейших пятен и антибактериальная обработка.</p>
+                        <div class="service-card__footer">
+                            <span class="price-from">от 500 BYN</span>
+                            <button class="btn btn--sm open-modal-btn">Подробнее</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="service-card" data-id="polishing" data-category="body">
+                    <div class="service-card__content">
+                        <h2>Восстановительная полировка</h2>
+                        <p>Устранение до 95% мелких царапин, паутины и голограмм на лаке.</p>
+                        <div class="service-card__footer">
+                            <span class="price-from">от 600 BYN</span>
+                            <button class="btn btn--sm open-modal-btn">Подробнее</button>
+                        </div>
+                    </div>
+                </article>
+
+                
+                <article class="service-card hidden" data-id="leather" data-category="interior">
+                    <div class="service-card__content">
+                        <h2>Защита кожи и текстиля</h2>
+                        <p>Нанесение гидрофобных и грязеотталкивающих кварцевых составов на сиденья.</p>
+                        <div class="service-card__footer">
+                            <span class="price-from">от 270 BYN</span>
+                            <button class="btn btn--sm open-modal-btn">Подробнее</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="service-card hidden" data-id="film" data-category="body">
+                    <div class="service-card__badge">Премиум</div>
+                    <div class="service-card__content">
+                        <h2>Оклейка полиуретаном</h2>
+                        <p>Абсолютная броня кузова от гравия, веток, мелких ДТП и пескоструя.</p>
+                        <div class="service-card__footer">
+                            <span class="price-from">от 2 400 BYN</span>
+                            <button class="btn btn--sm open-modal-btn">Подробнее</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="load-more-wrapper">
+                <button class="btn btn--outline" id="load-more-btn">Показать все услуги</button>
+            </div>
+        </section>
+    </main>
