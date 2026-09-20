@@ -109,3 +109,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
         startAutoplay();
     }
+
+     // ==================== 4. ФИЛЬТРАЦИЯ КАТЕГОРИЙ И ДОП. КАРТОЧКИ ====================
+    const filterContainer = document.getElementById("category-filters");
+    const loadMoreBtn = document.getElementById("load-more-btn");
+    const cards = document.querySelectorAll(".service-card");
+
+    if (filterContainer) {
+        filterContainer.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("category-btn")) return;
+            
+            // Активный класс
+            filterContainer.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+            e.target.classList.add("active");
+
+            const selectedCat = e.target.getAttribute("data-category");
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute("data-category");
+                // Если карточка скрыта кнопкой "Показать все", не трогаем её при фильтре "all" пока не нажмут раскрытие
+                const isExtraCard = card.classList.contains("hidden") && !loadMoreBtn.classList.contains("hidden-state");
+
+                if (selectedCat === "all") {
+                    // Возвращаем дефолтное состояние (первые 3 видны, остальные скрыты)
+                    if (card.hasAttribute("data-id") && (card.getAttribute("data-id") === "leather" || card.getAttribute("data-id") === "film")) {
+                        card.style.display = "none";
+                    } else {
+                        card.style.display = "flex";
+                    }
+                } else if (selectedCat === cardCat) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    }
+
+    // Кнопка "Показать все услуги" (Дополнительные карточки)
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener("click", () => {
+            cards.forEach(card => {
+                card.classList.remove("hidden");
+                card.style.display = "flex";
+            });
+            // Возвращаем "Все услуги" в активный фильтр, чтобы сбросить ограничения сеток
+            if (filterContainer) {
+                filterContainer.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+                filterContainer.querySelector('[data-category="all"]').classList.add("active");
+            }
+            loadMoreBtn.style.display = "none";
+        });
+    }
