@@ -62,3 +62,50 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+     // ==================== 3. СЛАЙДЕР / КАРУСЕЛЬ ====================
+    const slider = document.getElementById("main-slider");
+    if (slider) {
+        const slides = slider.querySelectorAll(".slider__slide");
+        const prevBtn = slider.querySelector(".slider__btn--prev");
+        const nextBtn = slider.querySelector(".slider__btn--next");
+        const dotsContainer = slider.querySelector(".slider__dots");
+        let currentIdx = 0;
+        let slideInterval;
+
+        // Создаем индикаторы (dots)
+        slides.forEach((_, idx) => {
+            const dot = document.createElement("button");
+            dot.classList.add("slider__dot");
+            if (idx === 0) dot.classList.add("active");
+            dot.setAttribute("aria-label", `Перейти к слайду ${idx + 1}`);
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll(".slider__dot");
+
+        function changeSlide(idx) {
+            slides[currentIdx].classList.remove("active");
+            dots[currentIdx].classList.remove("active");
+            
+            currentIdx = (idx + slides.length) % slides.length;
+            
+            slides[currentIdx].classList.add("active");
+            dots[currentIdx].classList.add("active");
+        }
+
+        function nextSlide() { changeSlide(currentIdx + 1); }
+        function prevSlide() { changeSlide(currentIdx - 1); }
+
+        nextBtn.addEventListener("click", () => { nextSlide(); resetAutoplay(); });
+        prevBtn.addEventListener("click", () => { prevSlide(); resetAutoplay(); });
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener("click", () => { changeSlide(idx); resetAutoplay(); });
+        });
+
+        function startAutoplay() { slideInterval = setInterval(nextSlide, 5000); }
+        function resetAutoplay() { clearInterval(slideInterval); startAutoplay(); }
+
+        startAutoplay();
+    }
