@@ -26,3 +26,39 @@ const servicesData = {
         prices: { sedan: 2519, crossover: 3059, suv: 3599 }
     }
 };
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // ==================== 1. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ====================
+    const themeToggle = document.getElementById("theme-toggle");
+    const currentTheme = localStorage.getItem("theme") || "dark";
+    
+    document.documentElement.setAttribute("data-theme", currentTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            let theme = document.documentElement.getAttribute("data-theme");
+            let newTheme = theme === "dark" ? "light" : "dark";
+            
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+        });
+    }
+
+    // ==================== 2. БУРГЕР-МЕНЮ ====================
+    const burgerBtn = document.getElementById("burger-btn");
+    const navMenu = document.getElementById("nav-menu");
+
+    if (burgerBtn && navMenu) {
+        burgerBtn.addEventListener("click", () => {
+            burgerBtn.classList.toggle("open");
+            navMenu.classList.toggle("open");
+        });
+
+        // Закрытие при клике по ссылке
+        document.querySelectorAll(".nav__link").forEach(link => {
+            link.addEventListener("click", () => {
+                burgerBtn.classList.remove("open");
+                navMenu.classList.remove("open");
+            });
+        });
+    }
