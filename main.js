@@ -161,3 +161,78 @@ document.addEventListener("DOMContentLoaded", () => {
             loadMoreBtn.style.display = "none";
         });
     }
+
+    // ==================== 5. МОДАЛЬНОЕ ОКНО И ДИНАМИЧЕСКИЙ РАСЧЕТ БЕЗ ПЕРЕЗАГРУЗКИ ====================
+    const modal = document.getElementById("info-modal");
+    const modalContent = document.getElementById("modal-dynamic-content");
+    const servicesGrid = document.getElementById("services-container");
+
+    if (servicesGrid && modal) {
+        servicesGrid.addEventListener("click", (e) => {
+            const btn = e.target.closest(".open-modal-btn");
+            if (!btn) return;
+
+            const card = btn.closest(".service-card");
+            const serviceId = card.getAttribute("data-id");
+            const data = servicesData[serviceId];
+
+            if (!data) return;
+
+            // Рендерим внутренности модалки динамически
+            modalContent.innerHTML = `
+                <h2>${data.title}</h2>
+                <p style="margin-top:15px; color:var(--text-secondary);">${data.desc}</p>
+                
+                <div class="calc-group">
+                    <label for="car-class">Выберите класс вашего автомобиля:</label>
+                    <select id="car-class" class="calc-select">
+                        <option value="sedan">Седан / Хэтчбек</option>
+                        <option value="crossover">Кроссовер / Компактный SUV</option>
+                        <option value="suv">Внедорожник / Премиум Седан</option>
+                    </select>
+                </div>
+
+                <div class="modal-price-box">
+                    Итоговая стоимость: <span id="dynamic-price">${data.prices.sedan.toLocaleString()} BYN</span>
+                </div>
+                
+                <button class="btn" style="width:100%; margin-top:20px;">Записаться на обслуживание</button>
+            `;
+
+            // Навешиваем событие изменения параметров прямо в модалке (расчет без перезагрузки)
+            const selectClass = modalContent.querySelector("#car-class");
+            const priceSpan = modalContent.querySelector("#dynamic-price");
+
+            selectClass.addEventListener("change", (event) => {
+                const chosenClass = event.target.value;
+                const newPrice = data.prices[chosenClass];
+                priceSpan.textContent = `${newPrice.toLocaleString()} BYN`;
+            });
+
+            // Открываем модальное окно
+            modal.classList.add("open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden"; // Блокируем скролл фона
+        });
+    }
+
+    // Закрытие модального окна
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target.hasAttribute("data-close")) {
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
+        });
+
+        // Закрытие по ESC
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal.classList.contains("open")) {
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
+        });
+    }
+});
