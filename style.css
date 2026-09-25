@@ -31,6 +31,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth; /* Плавный переход по якорным ссылкам */
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-primary);
@@ -40,6 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden; /* Защита от горизонтального скролла */
 }
 
 main {
@@ -73,7 +78,6 @@ main {
     align-items: center;
     height: 80px;
 }
-
 .logo {
     font-weight: 800;
     font-size: 24px;
@@ -94,6 +98,18 @@ main {
     object-fit: contain;
 }
 
+.logo__text {
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    transition: color var(--transition-speed);
+}
+
+.logo__text:hover {
+    color: var(--accent);
+}
+
 .nav__list {
     display: flex;
     list-style: none;
@@ -105,6 +121,7 @@ main {
     text-decoration: none;
     font-weight: 500;
     font-size: 16px;
+    position: relative;
     transition: color var(--transition-speed);
 }
 
@@ -126,11 +143,12 @@ main {
     cursor: pointer;
     padding: 8px 12px;
     border-radius: 8px;
-    transition: background var(--transition-speed);
+    transition: background var(--transition-speed), border-color var(--transition-speed);
 }
 
 .theme-btn:hover {
     background-color: var(--bg-primary);
+    border-color: var(--accent);
 }
 
 /* Бургер-меню */
@@ -149,14 +167,13 @@ main {
 .burger span {
     display: block;
     width: 100%;
-    height: 30px;
     height: 3px;
     background-color: var(--text-primary);
     border-radius: 2px;
     transition: transform var(--transition-speed), opacity var(--transition-speed);
 }
 
-/* Стили Слайдера (Карусели) */
+/* Стили Слайдера */
 .hero {
     padding: 40px 0;
 }
@@ -188,7 +205,7 @@ main {
     display: flex;
     align-items: center;
     padding: 0 80px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), #2a2a2a;
+    background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%), #2a2a2a;
 }
 
 .slider__slide.active {
@@ -224,11 +241,15 @@ main {
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: background-color var(--transition-speed);
+    transition: background-color var(--transition-speed), transform 0.1s ease;
 }
 
 .btn:hover {
     background-color: var(--accent-hover);
+}
+
+.btn:active {
+    transform: scale(0.98);
 }
 
 .btn--sm {
@@ -290,7 +311,7 @@ main {
     background: rgba(255, 255, 255, 0.4);
     border: none;
     cursor: pointer;
-    transition: background var(--transition-speed);
+    transition: background var(--transition-speed), width var(--transition-speed);
 }
 
 .slider__dot.active {
@@ -300,11 +321,11 @@ main {
 }
 
 /* Секция Преимуществ */
-.features {
-    padding: 60px 40px;
+.features, .gallery, .reviews, .catalog-section {
+    padding: 60px 0;
 }
 
-.features h2, .catalog-section h1 {
+.features h2, .gallery h2, .reviews h2, .catalog-section h1 {
     font-size: 32px;
     margin-bottom: 40px;
     text-align: center;
@@ -322,6 +343,11 @@ main {
     border-radius: 12px;
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 12px var(--card-shadow);
+    transition: border-color var(--transition-speed);
+}
+
+.feature-card:hover {
+    border-color: var(--accent);
 }
 
 .feature-card__icon {
@@ -336,6 +362,90 @@ main {
 
 .feature-card p {
     color: var(--text-secondary);
+}
+
+/* Стили Галереи */
+.gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.gallery__item {
+    position: relative;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 280px; /* Увеличили высоту для лучшей видимости фото */
+    box-shadow: 0 4px 12px var(--card-shadow);
+    cursor: pointer;
+    transition: border-color var(--transition-speed), transform var(--transition-speed);
+}
+
+/* Эффект наведения на всю карточку */
+.gallery__item:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+/* Стилизация самого изображения */
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* При наведении картинка плавно увеличивается */
+.gallery__item:hover .gallery__img {
+    transform: scale(1.08);
+}
+
+/* Текстовая плашка поверх картинки с легким градиентом для читаемости */
+.gallery__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 15px 15px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff; /* Текст всегда белый для контраста на фото */
+    text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+    z-index: 2;
+    transition: color var(--transition-speed);
+}
+
+/* Подсветка текста акцентным цветом при наведении */
+.gallery__item:hover .gallery__title {
+    color: var(--accent);
+}
+
+/* Стили Отзывов */
+.reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.review-card {
+    background-color: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.review-card__text {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.review-card__author {
+    font-weight: 600;
+    color: var(--accent);
 }
 
 /* Страница Услуг: Категории и Сетка */
@@ -378,12 +488,12 @@ main {
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 12px var(--card-shadow);
-    transition: transform var(--transition-speed);
+    transition: transform var(--transition-speed), border-color var(--transition-speed);
 }
 
 .service-card:hover {
-    transform: translateY(-50px);
     transform: translateY(-5px);
+    border-color: var(--accent);
 }
 
 .service-card.hidden {
@@ -424,6 +534,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }
 
 .price-from {
@@ -453,157 +564,260 @@ main {
     pointer-events: none;
     transition: opacity var(--transition-speed) ease;
 }
-
 .modal.open {
-    opacity: 1;
-    pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modal__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--modal-overlay);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-overlay);
 }
 
 .modal__window {
-    position: relative;
-    background-color: var(--bg-secondary);
-    width: 100%;
-    max-width: 550px;
-    padding: 40px;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 1010;
-    transform: translateY(-20px);
-    transition: transform var(--transition-speed) ease;
+  position: relative;
+  background-color: var(--bg-secondary);
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1010;
+  transform: translateY(-20px);
+  transition: transform var(--transition-speed) ease;
 }
 
 .modal.open .modal__window {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .modal__close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 32px;
-    color: var(--text-primary);
-    cursor: pointer;
-    line-height: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: var(--text-primary);
+  cursor: pointer;
+  line-height: 1;
 }
 
-/* Динамические селекторы параметров внутри модального окна */
 .calc-group {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .calc-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .calc-select {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
 }
 
 .modal-price-box {
-    background-color: var(--bg-primary);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    margin-top: 25px;
-    border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 25px;
+  border: 1px solid var(--border-color);
 }
 
 .modal-price-box span {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
 }
 
+/* ========== ФУТЕР ========== */
 
 .footer {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-    padding: 25px 0;
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-top: auto;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 40px 0;
+  margin-top: auto;
 }
 
-/* ==================== МЕДИА-ЗАПРОСЫ (Адаптивность 1440px - 380px) ==================== */
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.footer__info,
+.footer__socials {
+  display: flex;
+  gap: 30px;
+}
+
+.footer__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+.footer__link:hover {
+  color: var(--accent);
+}
+
+.footer__copy {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ==================== МЕДИА-ЗАПРОСЫ (Адаптивность от 1440px до 380px) ==================== */
 
 @media (max-width: 1200px) {
-    .container { padding: 0 30px; }
-    .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .container {
+    padding: 0 30px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 992px) {
-    .features__grid { grid-template-columns: repeat(2, 1fr); }
-    .slide__content h1 { font-size: 34px; }
-    .slider { height: 400px; }
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .slide__content h1 {
+    font-size: 34px;
+  }
+  .slider {
+    height: 400px;
+  }
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-    /* Мобильное бургер-меню */
-    .burger { display: flex; }
-    
-    .nav {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background-color: var(--bg-secondary);
-        transition: left var(--transition-speed) ease;
-        padding: 40px;
-        border-top: 1px solid var(--border-color);
-    }
-    
-    .nav.open { left: 0; }
-    .nav__list { flex-direction: column; gap: 25px; align-items: center; }
-    .nav__link { font-size: 20px; }
+  .burger {
+    display: flex;
+  }
+.nav {
+    position: fixed;
+    top: 80px;
+    left: -100%; /* Меняем 0 на -100%, чтобы меню изначально было скрыто слева за экраном */
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: var(--bg-secondary);
+    padding: 40px;
+    border-top: 1px solid var(--border-color);
+    z-index: 105;
+    transition: left var(--transition-speed) ease-in-out; /* Добавляем плавность для выезда */
+}
 
-    /* Бургер анимация крестика */
-    .burger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    .slider__slide { padding: 0 40px; }
-    .slide__content h1 { font-size: 28px; }
-    .features__grid, .services-grid { grid-template-columns: 1fr; }
-    .categories { flex-wrap: wrap; }
+.nav.open {
+    left: 0; /* При наличии класса .open меню выезжает на экран */
+}
+  .nav__list {
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+  }
+  .nav__link {
+    font-size: 20px;
+  }
+  
+  /* Бургер анимация */
+  .burger.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .burger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  .slider__slide {
+    padding: 0 40px;
+  }
+  .slide__content h1 {
+    font-size: 28px;
+  }
+  .features__grid,
+  .services-grid,
+  .reviews__grid {
+    grid-template-columns: 1fr;
+  }
+  .categories {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer__info,
+  .footer__socials {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 @media (max-width: 480px) {
-    .container { padding: 0 15px; }
-    .slider { height: 350px; }
-    .slider__slide { padding: 0 20px; }
-    .slide__content h1 { font-size: 24px; }
-    .slide__content p { font-size: 15px; }
-    .slider__btn { width: 35px; height: 35px; font-size: 20px; }
-    .modal__window { padding: 25px 20px; }
-    .logo { font-size: 20px; }
+  .container {
+    padding: 0 20px;
+  }
+  .slider {
+    height: 350px;
+  }
+  .slider__slide {
+    padding: 0 20px;
+  }
+  .slide__content h1 {
+    font-size: 24px;
+  }
+  .slide__content p {
+    font-size: 15px;
+  }
+  .slider__btn {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+  .modal__window {
+    padding: 25px 20px;
+  }
+  .logo__text {
+    font-size: 20px;
+  }
+  .gallery__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 380px) {
-    /* Ограничение и микро-фиксы для минимального заявленного брейкпоинта */
-    body { font-size: 14px; }
-    .category-btn { padding: 8px 14px; font-size: 13px; }
-    .btn { padding: 12px 20px; font-size: 14px; }
+  body {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 15px;
+  }
+  .category-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
 }
