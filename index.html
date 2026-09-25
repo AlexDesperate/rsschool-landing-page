@@ -7,81 +7,152 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header class="header">
         <div class="container header__container">
             <a href="index.html" class="logo"><img src="images/car-logo.png" alt="Car" class="logo__img"> AlexDesperate detailing</a>
-            <nav class="nav" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="index.html" class="nav__link active">Главная</a></li>
-                    <li class="nav__item"><a href="services.html" class="nav__link">Услуги и Калькулятор</a></li>
-                </ul>
+            
+            <nav class="nav"> 
+    <ul class="nav__list" id="nav-menu">
+    <li><a href="index.html" class="nav__link active">Главная</a></li>
+    <li><a href="index.html#features" class="nav__link">Преимущества</a></li>
+    <li><a href="index.html#gallery" class="nav__link">Галерея</a></li>
+    <li><a href="services.html" class="nav__link">Услуги и Калькулятор</a></li>
+</ul>
             </nav>
             <div class="header__actions">
-                <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему">🌓</button>
+                <button class="theme-btn" id="theme-toggle" aria-label="Переключить тему">🌓</button>
                 <button class="burger" id="burger-btn" aria-label="Открыть меню">
-                    <span></span><span></span><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </header>
-        <main>
-        <section class="hero">
-            <div class="container">
-                <div class="slider" id="main-slider">
-                    <div class="slider__track">
-                        <div class="slider__slide active">
-                            <div class="slide__content">
-                                <h1>Премиум защита вашего авто</h1>
-                                <p>Керамические покрытия нового поколения со сроком службы до 5 лет.</p>
-                                <a href="services.html" class="btn">Каталог услуг</a>
-                            </div>
-                        </div>
-                        <div class="slider__slide">
-                            <div class="slide__content">
-                                <h1>Идеальная чистота салона</h1>
-                                <p>Деликатная химчистка с разбором и озонацией воздуха.</p>
-                                <a href="services.html" class="btn">Подробнее</a>
-                            </div>
-                        </div>
-                        <div class="slider__slide">
-                            <div class="slide__content">
-                                <h1>Защита кузова полиуретаном</h1>
-                                <p>Антигравийная пленка защитит от сколов, царапин и реагентов.</p>
-                                <a href="services.html" class="btn">Рассчитать стоимость</a>
-                            </div>
+
+    <main>
+        <section class="hero container">
+            <div class="slider" id="main-slider">
+                <div class="slider__track">
+                    <div class="slider__slide active">
+                        <div class="slide__content">
+                            <h1>Премиум защита вашего авто</h1>
+                            <p>Керамические покрытия нового поколения со сроком службы до 5 лет.</p>
+                            <a href="#catalog" class="btn">Каталог услуг</a>
                         </div>
                     </div>
-                    <button class="slider__btn slider__btn--prev" aria-label="Назад">‹</button>
-                    <button class="slider__btn slider__btn--next" aria-label="Вперед">›</button>
-                    <div class="slider__dots"></div>
+                    <div class="slider__slide">
+                        <div class="slide__content">
+                            <h1>Идеальная чистота салона</h1>
+                            <p>Деликатная химчистка с разбором и озонацией воздуха.</p>
+                            <a href="#catalog" class="btn">Подробнее</a>
+                        </div>
+                    </div>
+                    <div class="slider__slide">
+                        <div class="slide__content">
+                            <h1>Защита кузова полиуретаном</h1>
+                            <p>Антигравийная пленка защитит от сколов, царапин и реагентов.</p>
+                            <a href="#catalog" class="btn">Рассчитать стоимость</a>
+                        </div>
+                    </div>
                 </div>
+                <button class="slider__btn slider__btn--prev" aria-label="Предыдущий слайд">‹</button>
+                <button class="slider__btn slider__btn--next" aria-label="Следующий слайд">›</button>
+                <div class="slider__dots"></div>
             </div>
         </section>
 
-        <section class="features container">
+        <section id="features" class="features container">
             <h2>Почему выбирают нас</h2>
             <div class="features__grid">
-                <article class="feature-card">
-                    <div class="feature-card__icon">🛡️</div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">🛡</div>
                     <h3>Гарантия качества</h3>
                     <p>Даем официальную гарантию на все виды защитных покрытий и пленок.</p>
-                </article>
-                <article class="feature-card">
+                </div>
+                <div class="feature-card">
                     <div class="feature-card__icon">🧪</div>
                     <h3>Премиум химия</h3>
                     <p>Используем только сертифицированные составы из Германии и Японии.</p>
-                </article>
-                <article class="feature-card">
+                </div>
+                <div class="feature-card">
                     <div class="feature-card__icon">🏆</div>
                     <h3>Опытные мастера</h3>
                     <p>Наши специалисты сертифицированы мировыми дитейлинг-брендами.</p>
-                </article>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gallery" class="gallery container">
+    <h2>Наша галерея работ</h2>
+    <div class="gallery__grid">
+        <!-- Полировка кузова -->
+        <div class="gallery__item">
+            <img src="images/Полировкакузова.jpg" alt="Процесс полировки кузова автомобиля" class="gallery__img">
+            <span class="gallery__title">Полировка кузова</span>
+        </div>
+        
+        <!-- Нанесение керамики -->
+        <div class="gallery__item">
+            <img src="images/Нанесениекерамики.jpg" alt="Нанесение керамического защитного покрытия" class="gallery__img">
+            <span class="gallery__title">Нанесение керамики</span>
+        </div>
+        
+        <!-- Химчистка салона -->
+        <div class="gallery__item">
+            <img src="images/Химчисткасалона.jpg" alt="Профессиональная химчистка сидений салона" class="gallery__img">
+            <span class="gallery__title">Химчистка салона</span>
+        </div>
+        
+        <!-- Оклейка зон риска -->
+        <div class="gallery__item">
+            <img src="images/оклейказонрискаавто.jpg" alt="Оклейка передней части автомобиля защитной пленкой" class="gallery__img">
+            <span class="gallery__title">Оклейка зон риска</span>
+        </div>
+    </div>
+</section>
+
+        <section id="catalog" class="catalog-section container">
+            <h1>Наши услуги</h1>
+            
+            <div class="categories" id="category-filters">
+                <button class="category-btn active" data-category="all">Все услуги</button>
+                <button class="category-btn" data-category="body">Уход за кузовом</button>
+                <button class="category-btn" data-category="interior">Детейлинг салона</button>
+            </div>
+
+            <!-- Контейнер пуст, он заполняется динамически из JS массива, исключая дублирование данных -->
+            <div id="services-container" class="services-grid"></div>
+
+            <div class="load-more-wrapper">
+                <button id="load-more-btn" class="btn btn--outline">Показать все услуги</button>
             </div>
         </section>
     </main>
-        <footer class="footer">
+
+    <!-- Модальное окно -->
+    <div class="modal" id="info-modal" aria-hidden="true">
+        <div class="modal__overlay" data-close></div>
+        <div class="modal__window">
+            <button class="modal__close" data-close aria-label="Закрыть модальное окно">×</button>
+            <div id="modal-dynamic-content">
+               
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
         <div class="container footer__container">
-            <p>&copy; 2026 AlexDesperate detailing. Все права защищены.</p>
+            <div class="footer__info">
+                <p>Контакты: <a href="tel:+375290000000" class="footer__link">+375 (29) 000-00-00</a></p>
+                <p>Адрес: <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="footer__link">г. Минск, ул. Автомобильная, 12</a></p>
+            </div>
+            <div class="footer__socials">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer__link">Мой GitHub</a>
+                <a href="https://rs.school" target="_blank" rel="noopener noreferrer" class="footer__link">RS School</a>
+            </div>
+            <p class="footer__copy">&copy; 2026 AlexDesperate detailing. Все права защищены.</p>
         </div>
     </footer>
 
