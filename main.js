@@ -236,12 +236,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const modalContent = document.getElementById("modal-dynamic-content");
 
         if (modal && modalContent) {
+            
             servicesContainer.addEventListener("click", (e) => {
-                const btn = e.target.closest(".open-modal-btn");
-                if (!btn) return;
-
-                const card = btn.closest(".service-card");
-                if (!card) return;
+                const card = e.target.closest(".service-card");
+                if (!card) return; // Если кликнули не по карточке, игнорируем
 
                 const serviceId = card.getAttribute("data-id");
                 const data = servicesArray.find(service => service.id === serviceId);
